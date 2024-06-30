@@ -20,6 +20,7 @@ export class SurveyListComponent implements OnInit {
   constructor(private http: HttpClient, private authService: AuthService) {}
 
   ngOnInit(): void {
+    console.log('in teh survey list');
     this.http.get<any[]>(environment.surveyListURL, { headers: this.authService.getHeaders() })
       .subscribe({
         next: (data) => this.surveys = data,

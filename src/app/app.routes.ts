@@ -5,9 +5,9 @@ import { SurveyListComponent } from './_components/survey-list/survey-list.compo
 import {SurveyDetailsComponent} from "./_components/survey-details/survey-details.component";
 
 export const appRoutes: Routes = [
+  { path: '', redirectTo: '/surveys/list', pathMatch: 'full' },
   { path: 'user/login', component: AuthenticateComponent },
   { path: 'surveys/list', component: SurveyListComponent, canActivate: [AuthGuard] },
-  { path: 'survey/detail' , component: SurveyDetailsComponent, canActivate: [AuthGuard] },
-  { path: '', redirectTo: '/user/login', pathMatch: 'full' },
+  { path: 'survey/detail/:id' , component: SurveyDetailsComponent, canActivate: [AuthGuard] },
   { path: '**', redirectTo: '/user/login' }
 ];
