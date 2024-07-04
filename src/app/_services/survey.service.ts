@@ -15,4 +15,9 @@ export class SurveyService {
     const headers = this.authService.getHeaders();
     return this.http.get<ListOfSurveys[]>(environment.surveyListURL, { headers });
   }
+
+
+  getSurvey(surveyId: string, headers: HttpHeaders): Observable<any> {
+    return this.http.get(`${environment.getSurveyURL}${surveyId}?_format=json`, { headers });
+  }
 }

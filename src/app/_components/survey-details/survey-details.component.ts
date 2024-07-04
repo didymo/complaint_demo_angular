@@ -6,6 +6,7 @@ import { environment } from '../../../environments/environment';
 import { AuthService } from '../../_services/auth.service';
 import {CommonModule} from "@angular/common";
 import {FormsModule} from "@angular/forms";
+import {SurveyService} from "../../_services/survey.service";
 
 @Component({
   selector: 'app-survey-details',
@@ -15,13 +16,14 @@ import {FormsModule} from "@angular/forms";
   imports: [CommonModule, FormsModule]
 })
 export class SurveyDetailsComponent implements OnInit {
-  surveyId: number;
+  surveyId: string;
   surveyDetails: any;
 
   constructor(
     private route: ActivatedRoute,
     private http: HttpClient,
-    private authService: AuthService
+    private authService: AuthService,
+    private surveyService: SurveyService,
   ) {
     this.surveyId = this.route.snapshot.params['id'];
   }
@@ -32,15 +34,15 @@ export class SurveyDetailsComponent implements OnInit {
   }
 
   getSurveyDetail(): void {
-    this.http.get(`${environment.getSurveyURL}${this.surveyId}?_format=json`, { headers: this.authService.getHeaders() })
-      .subscribe(
-        (data) => {
-          this.surveyDetails = data;
-          console.log('Survey Details:', data);
-        },
-        (error) => {
-          console.error('Error fetching survey details:', error);
-        }
-      );
+    const headers = this.authService.getHeaders();
+    this.surveyService.getSurvey(this.surveyId, headers).subscribe(
+      (data) => {
+        this.surveyDetails = data;
+        console.log('Survey Details:', data);
+      },
+      (error) => {
+        console.error('Error fetching survey details:', error);
+      }
+    );
   }
 }
