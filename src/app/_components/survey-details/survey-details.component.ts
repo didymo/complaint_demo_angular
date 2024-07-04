@@ -28,6 +28,10 @@ export class SurveyDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     console.log('in the survey details');
+    this.getSurveyDetail();
+  }
+
+  getSurveyDetail(): void {
     this.http.get(`${environment.getSurveyURL}${this.surveyId}?_format=json`, { headers: this.authService.getHeaders() })
       .subscribe(
         (data) => {
