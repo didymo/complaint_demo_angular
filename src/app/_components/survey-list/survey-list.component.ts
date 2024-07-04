@@ -4,6 +4,7 @@ import { AuthService } from '../../_services/auth.service';
 import { environment } from '../../../environments/environment';
 import {CommonModule} from "@angular/common";
 import {Router, RouterLink} from '@angular/router';
+import {ListOfSurveys} from "../../_classes/list-of-surveys";
 
 @Component({
   selector: 'app-survey-list',
@@ -15,7 +16,7 @@ import {Router, RouterLink} from '@angular/router';
 
 
 export class SurveyListComponent implements OnInit {
-  surveys: any[] = [];
+  surveys: ListOfSurveys[] = [];
 
   constructor(private http: HttpClient, private authService: AuthService) {}
 
@@ -25,7 +26,7 @@ export class SurveyListComponent implements OnInit {
   }
 
   getSurveyList(): void {
-    this.http.get<any[]>(environment.surveyListURL, { headers: this.authService.getHeaders() })
+    this.http.get<ListOfSurveys[]>(environment.surveyListURL, { headers: this.authService.getHeaders() })
       .subscribe({
         next: (data) => this.surveys = data,
         error: (err) => console.error('Error fetching surveys', err)
