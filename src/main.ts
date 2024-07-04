@@ -8,7 +8,6 @@ import { SurveyListComponent } from './app/_components/survey-list/survey-list.c
 import {appRoutes} from "./app/app.routes";
 import {authInterceptor} from "./app/_services/auth.interceptor";
 
-
 bootstrapApplication(AppComponent, {
   providers: [
         provideHttpClient(withInterceptors([authInterceptor])),
