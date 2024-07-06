@@ -4,6 +4,7 @@ import {Observable} from "rxjs";
 import {environment} from "../../environments/environment";
 import {ListOfSurveys} from "../_classes/list-of-surveys";
 import {AuthService} from "./auth.service";
+import {Survey} from "../_classes/survey";
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class SurveyService {
   }
 
 
-  getSurvey(surveyId: string, headers: HttpHeaders): Observable<any> {
-    return this.http.get(`${environment.getSurveyURL}${surveyId}?_format=json`, { headers });
+  getSurvey(surveyId: string, headers: HttpHeaders): Observable<Survey> {
+    return this.http.get<Survey>(`${environment.getSurveyURL}${surveyId}?_format=json`, { headers });
   }
 }
