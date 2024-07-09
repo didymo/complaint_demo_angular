@@ -1,22 +1,34 @@
 // src/app/_components/survey-details/survey-details.component.ts
-import { Component, OnInit } from '@angular/core';
+import {Component, HostListener, OnInit, signal, ViewChild} from '@angular/core';
 import {ActivatedRoute, RouterLink} from '@angular/router';
-import { HttpClient } from '@angular/common/http';
-import { environment } from '../../../environments/environment';
-import { AuthService } from '../../_services/auth.service';
+import {HttpClient} from '@angular/common/http';
+import {environment} from '../../../environments/environment';
+import {AuthService} from '../../_services/auth.service';
 import {CommonModule} from "@angular/common";
 import {FormsModule} from "@angular/forms";
 import {SurveyService} from "../../_services/survey.service";
 import {Survey} from "../../_classes/survey";
 import {CdkDragDrop, DragDropModule, moveItemInArray} from "@angular/cdk/drag-drop";
+import {BrowserModule} from "@angular/platform-browser";
+import {MatExpansionModule} from "@angular/material/expansion";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatInputModule} from "@angular/material/input";
+import {MatDialogModule} from "@angular/material/dialog";
+import {MatNativeDateModule, MatOptionModule} from "@angular/material/core";
+import {MatSelectModule} from "@angular/material/select";
+import {MatDatepickerModule} from "@angular/material/datepicker";
 
+
+function PreviewComponent() {
+
+}
 
 @Component({
   selector: 'app-survey-details',
   templateUrl: './survey-details.component.html',
   styleUrls: ['./survey-details.component.css'],
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink, DragDropModule]
+  imports: [CommonModule, FormsModule, RouterLink]
 })
 export class SurveyDetailsComponent implements OnInit {
   surveyId: string;
@@ -44,6 +56,7 @@ export class SurveyDetailsComponent implements OnInit {
     {value: '0', label: 'Optional'}
   ]
 
+
   constructor(
     private route: ActivatedRoute,
     private http: HttpClient,
@@ -52,6 +65,7 @@ export class SurveyDetailsComponent implements OnInit {
   ) {
     this.surveyId = this.route.snapshot.params['id'];
   }
+
 
   ngOnInit(): void {
     console.log('in the survey details');
@@ -70,5 +84,5 @@ export class SurveyDetailsComponent implements OnInit {
       }
     );
   }
-
 }
+

@@ -1,0 +1,244 @@
+#wrapper {
+  overflow: hidden; /* will contain if #first is longer than #second */
+}
+
+
+.cdk-drag-preview {
+  box-sizing: border-box;
+  border-radius: 4px;
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+  0 8px 10px 1px rgba(0, 0, 0, 0.14),
+  0 3px 14px 2px rgba(0, 0, 0, 0.12);
+
+}
+.cdk-drag-placeholder {
+  opacity: 0;
+}
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.assessment-item:last-child {
+  border: none;
+}
+
+.assessment-list.cdk-drop-list-dragging .assessment-item:not(.cdk-drag-placeholder) {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+
+/* Medium screens */
+@media all and (max-width: 800px) {
+  .navigation {
+    /* When on medium sized screens, we center it by evenly distributing empty space around items */
+    justify-content: space-around;
+  }
+}
+
+/* Small screens */
+@media all and (max-width: 500px) {
+  .navigation {
+    /* On small screens, we are no longer using row direction but column */
+    flex-direction: column;
+  }
+}
+
+/* Preview Component */
+#preview,
+#assessment-drag-list {
+  padding-left: 1%;
+  overflow: hidden;
+  float: left;
+  width: 50%;
+}
+
+/* The questions */
+#questions {
+  width: 100%;
+  float: left; /* add this */
+}
+
+/* Assessment lists */
+#assessments {
+  margin-top: 0.5%;
+  margin-bottom: 2%;
+  border-radius: 5px;
+  margin-left: 2%;
+  margin-right: 1%;
+  width: 97%;
+  box-shadow: 0px 0px 5px #b4b4b4;
+}
+
+
+@media (min-width: 700px) {
+  #questions {
+    margin-left: 0;
+  }
+
+  #wrapper.toggled #questions {
+    margin-left: -15rem;
+  }
+}
+
+.nav-icons {
+  height: 25px;
+  width: 25px;
+}
+
+.navigation {
+  box-shadow: 5px 2px 10px #b4b4b4;
+  background: #ffffff;
+  display: flex;
+  flex-flow: row wrap;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: row;
+  z-index: 500;
+}
+
+.toolbar-item {
+  /*padding-bottom: 0.1%;*/
+  margin-top: 0.5%;
+  background: none;
+  border: none;
+  margin-right: 3px;
+}
+
+.toolbar-item:hover {
+  background-color: #e8e8e8; /* Green */
+  color: black;
+}
+
+.toolbar-title {
+  padding-top: 0.5%;
+}
+
+/* Medium screens */
+@media all and (max-width: 800px) {
+  .navigation {
+    /* When on medium sized screens, we center it by evenly distributing empty space around items */
+    justify-content: space-around;
+  }
+}
+
+/* Small screens */
+@media all and (max-width: 500px) {
+  .navigation {
+    /* On small screens, we are no longer using row direction but column */
+    flex-direction: column;
+  }
+}
+
+#heading {
+  width: 100%;
+}
+
+.choiceLabel {
+  width: 70%;
+}
+
+.imgView {
+  flex: .0;
+}
+.title-div {
+  padding: 1%;
+  display: flex;
+  height: 0.5%;
+}
+
+.title-div-child1 {
+  flex: .1;
+  padding-top: 7px;
+  margin-left: 3px;
+}
+
+.title-div-child2 {
+  flex: 2;
+  text-align: left;
+}
+
+#btn-div-1 {
+  margin-top: 2%;
+  margin-right: 1%;
+  padding-bottom: 1%;
+  display: flex;
+  align-content: flex-end;
+  justify-content: flex-end;
+}
+
+#btn-div-2 {
+  /*padding: 1px;*/
+  margin-top: 2%;
+  margin-right: 1%;
+  padding-bottom: 1%;
+  display: flex;
+  align-content: flex-end;
+  justify-content: flex-end;
+}
+
+#option-div-parent1 {
+  padding-top: 0.5%;
+  padding-left: 0.5%;
+  padding-right: 0.5%;
+  display: flex;
+}
+
+#option-div-parent2 {
+  padding-top: 0.5%;
+  padding-left: 0.5%;
+  padding-right: 0.5%;
+}
+
+#option-div-child {
+  display: flex;
+  flex-grow: 1;
+}
+
+#p-title {
+  margin-bottom: 0;
+}
+
+#spinner {
+  margin: auto;
+  margin-top: 20%;
+}
+.submit-child {
+  margin-right: 0.5%;
+}
+
+#nav2 {
+  display: flex;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.input-group-append {
+  border-radius: 1%;
+  border: 1px solid lightgray;
+  padding-top: 1%;
+  padding-left: 1%;
+  padding-right: 1%;
+  font-weight: bold;
+}
+
+#saveBtn, #mandatory1, #mandatory2, #optional1, #optional2, #change-field, #dropdownBasic2, #dropdownBasic1, #questionOrder
+{
+  background-color: #016fbe;
+}
+
+.modal-order{
+  background-color: #016fbe;
+  margin-right: 0.5%;
+}
+
+.choices-handle {
+  width: 30px;
+  display: flex;
+}
+.assessment-handle {
+  padding-left: 10px;
+}
+
+.handle {
+  cursor: pointer;
+}

@@ -7,10 +7,11 @@ import { AuthenticateComponent } from './app/_components/authenticate/authentica
 import { SurveyListComponent } from './app/_components/survey-list/survey-list.component';
 import {appRoutes} from "./app/app.routes";
 import {authInterceptor} from "./app/_services/auth.interceptor";
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 bootstrapApplication(AppComponent, {
   providers: [
         provideHttpClient(withInterceptors([authInterceptor])),
-    provideRouter(appRoutes),
+    provideRouter(appRoutes), provideAnimationsAsync(),
   ],
 }).catch(err => console.error(err));
