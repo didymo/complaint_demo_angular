@@ -84,5 +84,12 @@ export class SurveyDetailsComponent implements OnInit {
       }
     );
   }
+
+    submitSurvey(): void {
+    if (this.surveyDetails) {
+      console.log('Submitted Survey:', this.surveyDetails);
+      // Perform further actions like sending the data to the server
+    }
+  }
 }
 
