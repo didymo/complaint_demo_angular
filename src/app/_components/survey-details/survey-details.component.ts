@@ -17,6 +17,8 @@ import {MatDialogModule} from "@angular/material/dialog";
 import {MatNativeDateModule, MatOptionModule} from "@angular/material/core";
 import {MatSelectModule} from "@angular/material/select";
 import {MatDatepickerModule} from "@angular/material/datepicker";
+import {Assessment} from "../../_classes/assessment";
+import {AssessmentChoice} from "../../_classes/assessment-choice";
 
 
 function PreviewComponent() {
@@ -42,9 +44,8 @@ export class SurveyDetailsComponent implements OnInit {
    */
   public cellTypeList = [
     {value: 'Radio', label: 'Radio Buttons'},
-    {value: 'DistressThermometer', label: 'Distress Thermometer'},
-    {value: 'Likert', label: 'Likert Scale'},
-    {value: 'SelectMany', label: 'Select Many'}
+    {value: 'Text', label: 'Text'},
+    {value: 'Checkbox', label: 'Select Many'}
   ];
   public optionDisplayList = [
     {value: 'Date', label: 'Date'},
@@ -55,6 +56,8 @@ export class SurveyDetailsComponent implements OnInit {
     {value: '1', label: 'Mandatory'},
     {value: '0', label: 'Optional'}
   ]
+
+  newAssessment: Assessment = new Assessment('', '', '', '', '', '', '', '', '', 0, '', '', []);
 
 
   constructor(
@@ -90,6 +93,25 @@ export class SurveyDetailsComponent implements OnInit {
       console.log('Submitted Survey:', this.surveyDetails);
       // Perform further actions like sending the data to the server
     }
+  }
+
+   addAssessment(): void {
+    if (this.surveyDetails) {
+      this.surveyDetails.assessments.push(Object.assign({}, this.newAssessment));
+      this.resetNewAssessment();
+    }
+  }
+
+  addChoice(): void {
+    this.newAssessment.choices.push(new AssessmentChoice('', '', '', '', '', '', '', ''));
+  }
+
+  removeChoice(index: number): void {
+    this.newAssessment.choices.splice(index, 1);
+  }
+
+  resetNewAssessment(): void {
+    this.newAssessment = new Assessment('', '', '', '', '', '', '', '', '', 0, '', '', []);
   }
 }
 

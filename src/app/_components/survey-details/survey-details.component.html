@@ -4,6 +4,68 @@
 <!--  <pre>{{ surveyDetails | json }}</pre>-->
 <!--</div>-->
 
+<!--BEGIN SECTION-->
+<!--This is the section which render the survey as a web page-->
+<!--&#45;&#45;&#45;&#45;-->
+<!--&#45;&#45;&#45;&#45;-->
+<!--&#45;&#45;&#45;&#45;-->
+
+<!--<div *ngIf="surveyDetails">-->
+<!--  <h2>{{ surveyDetails.label }}</h2>-->
+
+<!--  <div *ngFor="let assessment of surveyDetails.assessments; let i = index">-->
+<!--    <div class="assessment">-->
+<!--      <h3>{{ assessment.description }}</h3>-->
+
+<!--      <div *ngIf="assessment.displayType === 'Radio'">-->
+<!--        <div *ngFor="let choice of assessment.choices">-->
+<!--          <input-->
+<!--            type="radio"-->
+<!--            [name]="'assessment_' + assessment.id"-->
+<!--            [id]="'choice_' + choice.id"-->
+<!--            [value]="choice.label"-->
+<!--            [(ngModel)]="assessment.answer"-->
+<!--            [ngModelOptions]="{standalone: true}"-->
+<!--          />-->
+<!--          <label [for]="'choice_' + choice.id">{{ choice.description }}</label>-->
+<!--        </div>-->
+<!--      </div>-->
+
+<!--      <div *ngIf="assessment.displayType === 'Text'">-->
+<!--        <input-->
+<!--          type="text"-->
+<!--          class="form-control"-->
+<!--          [(ngModel)]="assessment.answer"-->
+<!--          [ngModelOptions]="{standalone: true}"-->
+<!--        />-->
+<!--      </div>-->
+
+<!--      &lt;!&ndash; Add more conditionals here for other display types if needed &ndash;&gt;-->
+
+<!--    </div>-->
+<!--  </div>-->
+
+<!--  <button class="btn btn-primary" (click)="submitSurvey()">Submit Survey</button>-->
+<!--</div>-->
+
+<!--<div *ngIf="!surveyDetails">-->
+<!--  <p>Loading survey details...</p>-->
+<!--</div>-->
+
+<!--&#45;&#45;&#45;&#45;-->
+<!--&#45;&#45;&#45;&#45;-->
+<!--&#45;&#45;&#45;&#45;-->
+<!--END SECTION-->
+
+<!--BEGIN SECTION-->
+<!--This is the section which To allow editing of the AssessmentChoice fields
+(label, description, id), the assessment.description, and the survey.label,
+we can use ngModel for two-way data binding and make these fields editable directly
+in the template. -->
+<!--&#45;&#45;&#45;&#45;-->
+<!--&#45;&#45;&#45;&#45;-->
+<!--&#45;&#45;&#45;&#45;-->
+
 <div *ngIf="surveyDetails">
   <h2>
     <input type="text" [(ngModel)]="surveyDetails.label" placeholder="Survey Title" />
@@ -67,3 +129,123 @@
 <div *ngIf="!surveyDetails">
   <p>Loading survey details...</p>
 </div>
+
+
+<!--&#45;&#45;&#45;&#45;-->
+<!--&#45;&#45;&#45;&#45;-->
+<!--&#45;&#45;&#45;&#45;-->
+<!--END SECTION-->
+
+<!--BEGIN SECTION-->
+<!--This is the section which allows adding an assessment to the survey,
+we need to provide a form for users to input the new assessment's details,
+including selecting the type of assessment. We'll use a dropdown list for
+selecting the assessment type and provide fields to enter the necessary
+information. When the user submits this form, the new assessment will
+be added to the survey.-->
+<!--&#45;&#45;&#45;&#45;-->
+<!--&#45;&#45;&#45;&#45;-->
+<!--&#45;&#45;&#45;&#45;-->
+
+<div *ngIf="surveyDetails">
+  <h2>
+    <input type="text" [(ngModel)]="surveyDetails.label" placeholder="Survey Title" />
+  </h2>
+
+  <div *ngFor="let assessment of surveyDetails.assessments; let i = index">
+    <div class="assessment">
+      <h3>
+        <input type="text" [(ngModel)]="assessment.description" placeholder="Assessment Description" />
+      </h3>
+
+      <div *ngIf="assessment.displayType === 'Radio'">
+        <div *ngFor="let choice of assessment.choices">
+          <div class="choice">
+            <input
+              type="radio"
+              [name]="'assessment_' + assessment.id"
+              [id]="'choice_' + choice.id"
+              [value]="choice.label"
+              [(ngModel)]="assessment.answer"
+              [ngModelOptions]="{standalone: true}"
+            />
+            <label [for]="'choice_' + choice.id">
+              <input
+                type="text"
+                [(ngModel)]="choice.label"
+                placeholder="Choice Label"
+              />
+              <input
+                type="text"
+                [(ngModel)]="choice.description"
+                placeholder="Choice Description"
+              />
+              <input
+                type="text"
+                [(ngModel)]="choice.id"
+                placeholder="Choice ID"
+              />
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="assessment.displayType === 'Text'">
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="assessment.answer"
+          [ngModelOptions]="{standalone: true}"
+        />
+      </div>
+
+      <!-- Add more conditionals here for other display types if needed -->
+
+    </div>
+  </div>
+
+  <button class="btn btn-primary" (click)="submitSurvey()">Submit Survey</button>
+
+  <hr>
+
+  <h3>Add New Assessment</h3>
+  <div>
+    <label>Assessment Type: </label>
+    <select [(ngModel)]="newAssessment.displayType">
+      <option *ngFor="let type of cellTypeList" [value]="type.value">{{ type.label }}</option>
+    </select>
+  </div>
+
+  <div>
+    <label>Description: </label>
+    <input type="text" [(ngModel)]="newAssessment.description" placeholder="Assessment Description" />
+  </div>
+
+  <div *ngIf="newAssessment.displayType === 'Radio' || newAssessment.displayType === 'Checkbox'">
+    <h4>Choices</h4>
+    <div *ngFor="let choice of newAssessment.choices; let j = index">
+      <div class="choice">
+        <label>Label: </label>
+        <input type="text" [(ngModel)]="choice.label" placeholder="Choice Label" />
+        <label>Description: </label>
+        <input type="text" [(ngModel)]="choice.description" placeholder="Choice Description" />
+        <label>ID: </label>
+        <input type="text" [(ngModel)]="choice.id" placeholder="Choice ID" />
+        <button (click)="removeChoice(j)">Remove Choice</button>
+      </div>
+    </div>
+    <button (click)="addChoice()">Add Choice</button>
+  </div>
+
+  <button (click)="addAssessment()">Add Assessment</button>
+</div>
+
+<div *ngIf="!surveyDetails">
+  <p>Loading survey details...</p>
+</div>
+
+
+<!--&#45;&#45;&#45;&#45;-->
+<!--&#45;&#45;&#45;&#45;-->
+<!--&#45;&#45;&#45;&#45;-->
+<!--END SECTION-->
