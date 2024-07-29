@@ -88,12 +88,40 @@ export class SurveyDetailsComponent implements OnInit {
     );
   }
 
-    submitSurvey(): void {
-    if (this.surveyDetails) {
-      console.log('Submitted Survey:', this.surveyDetails);
-      // Perform further actions like sending the data to the server
-    }
+  /**
+   * This is the method which only logs
+   */
+  //   submitSurvey(): void {
+  //   if (this.surveyDetails) {
+  //     console.log('Submitted Survey:', this.surveyDetails);
+  //     // Perform further actions like sending the data to the server
+  //   }
+  // }
+
+
+  /**
+   * Saves, and submits the data to Drupal
+   * Generates a JSON string
+   * Calls addSurvey from the service class to interface with Drupal
+   */
+  public submitSurvey(): void {
+    // this.saveSurvey(); // Save any updated fields
+    // let gen = new PayloadGenerator(this.tabView);
+    // const payload = gen.genPayload();
+    const payload = JSON.stringify(this.surveyDetails);
+    console.log('payload');
+    console.log(this.surveyDetails);
+    this.surveyService
+      .addSurvey(payload) // Add the survey
+      .subscribe(
+        res => {
+          console.log('hi there');
+          console.log(res);
+        },
+          (error1: any) => console.log(error1) // Log errors
+      );
   }
+
 
    addAssessment(): void {
     if (this.surveyDetails) {

@@ -66,69 +66,69 @@ in the template. -->
 <!--&#45;&#45;&#45;&#45;-->
 <!--&#45;&#45;&#45;&#45;-->
 
-<div *ngIf="surveyDetails">
-  <h2>
-    <input type="text" [(ngModel)]="surveyDetails.label" placeholder="Survey Title" />
-  </h2>
+<!--<div *ngIf="surveyDetails">-->
+<!--  <h2>-->
+<!--    <input type="text" [(ngModel)]="surveyDetails.label" placeholder="Survey Title" />-->
+<!--  </h2>-->
 
-  <div *ngFor="let assessment of surveyDetails.assessments; let i = index">
-    <div class="assessment">
-      <h3>
-        <input type="text" [(ngModel)]="assessment.description" placeholder="Assessment Description" />
-      </h3>
+<!--  <div *ngFor="let assessment of surveyDetails.assessments; let i = index">-->
+<!--    <div class="assessment">-->
+<!--      <h3>-->
+<!--        <input type="text" [(ngModel)]="assessment.description" placeholder="Assessment Description" />-->
+<!--      </h3>-->
 
-      <div *ngIf="assessment.displayType === 'Radio'">
-        <div *ngFor="let choice of assessment.choices">
-          <div class="choice">
-            <input
-              type="radio"
-              [name]="'assessment_' + assessment.id"
-              [id]="'choice_' + choice.id"
-              [value]="choice.label"
-              [(ngModel)]="assessment.answer"
-              [ngModelOptions]="{standalone: true}"
-            />
-            <label [for]="'choice_' + choice.id">
-              <input
-                type="text"
-                [(ngModel)]="choice.label"
-                placeholder="Choice Label"
-              />
-              <input
-                type="text"
-                [(ngModel)]="choice.description"
-                placeholder="Choice Description"
-              />
-              <input
-                type="text"
-                [(ngModel)]="choice.id"
-                placeholder="Choice ID"
-              />
-            </label>
-          </div>
-        </div>
-      </div>
+<!--      <div *ngIf="assessment.displayType === 'Radio'">-->
+<!--        <div *ngFor="let choice of assessment.choices">-->
+<!--          <div class="choice">-->
+<!--            <input-->
+<!--              type="radio"-->
+<!--              [name]="'assessment_' + assessment.id"-->
+<!--              [id]="'choice_' + choice.id"-->
+<!--              [value]="choice.label"-->
+<!--              [(ngModel)]="assessment.answer"-->
+<!--              [ngModelOptions]="{standalone: true}"-->
+<!--            />-->
+<!--            <label [for]="'choice_' + choice.id">-->
+<!--              <input-->
+<!--                type="text"-->
+<!--                [(ngModel)]="choice.label"-->
+<!--                placeholder="Choice Label"-->
+<!--              />-->
+<!--              <input-->
+<!--                type="text"-->
+<!--                [(ngModel)]="choice.description"-->
+<!--                placeholder="Choice Description"-->
+<!--              />-->
+<!--              <input-->
+<!--                type="text"-->
+<!--                [(ngModel)]="choice.id"-->
+<!--                placeholder="Choice ID"-->
+<!--              />-->
+<!--            </label>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
 
-      <div *ngIf="assessment.displayType === 'Text'">
-        <input
-          type="text"
-          class="form-control"
-          [(ngModel)]="assessment.answer"
-          [ngModelOptions]="{standalone: true}"
-        />
-      </div>
+<!--      <div *ngIf="assessment.displayType === 'Text'">-->
+<!--        <input-->
+<!--          type="text"-->
+<!--          class="form-control"-->
+<!--          [(ngModel)]="assessment.answer"-->
+<!--          [ngModelOptions]="{standalone: true}"-->
+<!--        />-->
+<!--      </div>-->
 
-      <!-- Add more conditionals here for other display types if needed -->
+<!--      &lt;!&ndash; Add more conditionals here for other display types if needed &ndash;&gt;-->
 
-    </div>
-  </div>
+<!--    </div>-->
+<!--  </div>-->
 
-  <button class="btn btn-primary" (click)="submitSurvey()">Submit Survey</button>
-</div>
+<!--  <button class="btn btn-primary" (click)="submitSurvey()">Submit Survey</button>-->
+<!--</div>-->
 
-<div *ngIf="!surveyDetails">
-  <p>Loading survey details...</p>
-</div>
+<!--<div *ngIf="!surveyDetails">-->
+<!--  <p>Loading survey details...</p>-->
+<!--</div>-->
 
 
 <!--&#45;&#45;&#45;&#45;-->
