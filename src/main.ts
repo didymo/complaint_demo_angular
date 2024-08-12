@@ -1,4 +1,4 @@
-import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import {provideHttpClient, withFetch, withInterceptors} from '@angular/common/http';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { AppComponent } from './app/app.component';
 import { provideRouter, Route } from '@angular/router';
@@ -13,5 +13,6 @@ bootstrapApplication(AppComponent, {
   providers: [
         provideHttpClient(withInterceptors([authInterceptor])),
     provideRouter(appRoutes), provideAnimationsAsync(),
+    provideHttpClient(withFetch()),
   ],
 }).catch(err => console.error(err));
