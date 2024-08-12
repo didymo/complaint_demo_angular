@@ -1,0 +1,19 @@
+/* navigation.component.css */
+.navigation {
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+  background-color: #f0f0f0;
+}
+
+.navigation button {
+  margin: 0 0.5rem;
+}
+
+.navigation button:first-child {
+  margin-left: 0;
+}
+
+.navigation button:last-child {
+  margin-right: 0;
+}
