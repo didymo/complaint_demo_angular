@@ -11,8 +11,11 @@ import {environment} from "../../environments/environment";
 })
 export class FileUploadService {
   private uploadUrl = environment.postUploadFileURL;
+  private createEntityUrl = 'https://cdd.didymodesigns.com.au/api/survey-document-post-create';
 
-  constructor(private http: HttpClient, private authService: AuthService) {}
+
+  constructor(private http: HttpClient, private authService: AuthService) {
+  }
 
   uploadFile(file: File): Observable<any> {
     const headers = this.authService.getPOSTFileUploadHeaders()
@@ -27,6 +30,24 @@ export class FileUploadService {
       responseType: 'json'
     });
   }
+
+  createSurveyDocument(fid: string, label: string, notes: string, stepId: string, reportId: string): Observable<any> {
+    const headers = this.authService.getPOSTFileUploadHeaders()
+      .set('Content-Type', 'application/json');
+
+    const postData = {
+      label,
+      notes,
+      stepId,
+      reportId,
+      fid,
+      visible: true
+    };
+
+    return this.http.post(this.createEntityUrl, postData, {headers});
+  }
+
+
 }
 
 
