@@ -17,7 +17,7 @@ export class AuthService {
 
   constructor(private http: HttpClient, private router: Router) {
   }
-  
+
 
   login(username: string, password: string): Observable<any> {
     const url = environment.apiUrl;
@@ -115,23 +115,38 @@ export class AuthService {
   }
 
   getPOSTFileUploadHeaders(): HttpHeaders {
-  const token = this.getToken();
-  const csrfToken = this.getCsrfTokenFromStorage();
-
-  if (!token || !csrfToken) {
-    throw new Error('Authentication tokens are missing');
+    const token = this.getToken();
+    const csrfToken = this.getCsrfTokenFromStorage();
+    if (!token || !csrfToken) {
+      throw new Error('Authentication tokens are missing');
+    }
+    return new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Accept': 'application/vnd.api+json', // Make sure this matches the server's expected value
+      'X-CSRF-Token': csrfToken
+    });
   }
-
-  let headers = new HttpHeaders({
-    'Authorization': `Bearer ${token}`,
-    'Accept': 'application/vnd.api+json',
-    'X-CSRF-Token': csrfToken
-  });
-
-  headers = headers.set('Content-Type', 'application/octet-stream');
-
-  return headers;
-}
+  /**
+   * tryiong to sort the headers
+   */
+//   getPOSTFileUploadHeaders(): HttpHeaders {
+//   const token = this.getToken();
+//   const csrfToken = this.getCsrfTokenFromStorage();
+//
+//   if (!token || !csrfToken) {
+//     throw new Error('Authentication tokens are missing');
+//   }
+//
+//   let headers = new HttpHeaders({
+//     'Authorization': `Bearer ${token}`,
+//     'Accept': 'application/vnd.api+json',
+//     'X-CSRF-Token': csrfToken
+//   });
+//
+//   headers = headers.set('Content-Type', 'application/octet-stream');
+//
+//   return headers;
+// }
 
   getCsrfTokenFromStorage(): string | null {
   if (!this.csrfToken) {
